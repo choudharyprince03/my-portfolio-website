@@ -1,79 +1,127 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Code2, FileJson, Database, Github, PieChart, Table, PenTool } from 'lucide-react';
+import React from 'react';
 
-const skills = [
-  { name: 'MERN Stack', icon: <Code2 size={32} />, description: 'Building full-stack web applications using MongoDB, Express.js, React, and Node.js.' },
-  { name: 'JavaScript', icon: <FileJson size={32} />, description: 'Writing robust, modern ES6+ code for interactive user interfaces and complex logic.' },
-  { name: 'Python', icon: <Code2 size={32} />, description: 'Developing backend services, automation scripts, and performing data analysis.' },
-  { name: 'GitHub', icon: <Github size={32} />, description: 'Proficient in version control, collaborative workflows, and setting up CI/CD pipelines.' },
-  { name: 'Framer', icon: <PenTool size={32} />, description: 'Designing interactive prototypes and adding high-performance fluid animations.' },
-  { name: 'MySQL', icon: <Database size={32} />, description: 'Designing relational databases, writing queries, and optimizing data retrieval.' },
-  { name: 'Excel', icon: <Table size={32} />, description: 'Advanced data manipulation, complex formulas, charting, and spreadsheet automation.' },
-  { name: 'Power BI', icon: <PieChart size={32} />, description: 'Creating interactive, data-driven dashboards and business intelligence reports.' },
+// Original Logos in SVG format
+const CPPIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#00599C]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.78 10.74h-2.61V8.13h-1.42v2.61h-2.6v1.43h2.6v2.61h1.42v-2.61h2.61v-1.43zm-7.61 5.92c-.67.43-1.42.65-2.24.65-2.27 0-4.12-1.85-4.12-4.12s1.85-4.12 4.12-4.12c.82 0 1.57.22 2.24.65V6.86a6.83 6.83 0 0 0-3.32-.86c-3.8 0-6.88 3.08-6.88 6.88s3.08 6.88 6.88 6.88c1.23 0 2.37-.32 3.32-.86v-2.14z"/>
+  </svg>
+);
+
+const JSIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#F7DF1E]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0V0zm20.3 18.2c0-1.8-1-2.8-3.1-3.7-1.4-.6-1.8-1-1.8-1.7 0-.5.4-.9 1.1-.9.7 0 1.2.3 1.5.8l2-1.3c-.6-1.1-1.8-1.9-3.5-1.9-2.3 0-3.8 1.4-3.8 3.4 0 2 1.3 2.9 3.3 3.7 1.5.6 1.8 1.1 1.8 1.8 0 .7-.6 1.1-1.4 1.1-.9 0-1.5-.4-1.9-1.2l-2.1 1.2c.6 1.3 2 2.2 4 2.2 2.4-.1 4-1.3 4-3.7z"/>
+  </svg>
+);
+
+const SQLIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#00758F]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 4.02 2 6.5S6.48 11 12 11s10-2.02 10-6.5S17.52 2 12 2zm0 18c-5.52 0-10-2.02-10-6.5V17c0 4.48 4.48 6.5 10 6.5s10-2.02 10-6.5v-3.5c0 4.48-4.48 6.5-10 6.5zm0-9c-5.52 0-10-2.02-10-6.5V11c0 4.48 4.48 6.5 10 6.5s10-2.02 10-6.5V8c0 4.48-4.48 6.5-10 6.5z"/>
+  </svg>
+);
+
+const HTMLIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#E34F26]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.5 0h21l-1.9 21.2L12 24l-8.6-2.8L1.5 0zm17.3 6.1H7.8l.2 2.5h10.4l-.4 4.5-3.5 1-3.5-1-.2-2.3H8.3l.4 4.4 5.3 1.4 5.3-1.4.6-6.6-.1-3z"/>
+  </svg>
+);
+
+const ReactIcon = () => (
+  <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-10 h-10 stroke-[#61DAFB] fill-none animate-[spin_20s_linear_infinite]" strokeWidth="1.2" xmlns="http://www.w3.org/2000/svg">
+    <ellipse rx="11" ry="4.2"/>
+    <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+    <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+    <circle r="2" className="fill-[#61DAFB]"/>
+  </svg>
+);
+
+const TailwindIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#38BDF8]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 6.018C12 3.12 14.88 0 18.72 0 22.8 0 24 3.12 24 6.018c0 3.858-3.6 7.218-7.2 9.618 3.6 2.4 7.2 5.76 7.2 9.618 0 2.898-1.2 6.018-5.28 6.018-3.84 0-6.72-3.12-6.72-6.018 0-3.858 3.6-7.218 7.2-9.618-3.6-2.4-7.2-5.76-7.2-9.618zm-12 0C0 3.12 2.88 0 6.72 0 10.8 0 12 3.12 12 6.018c0 3.858-3.6 7.218-7.2 9.618 3.6 2.4 7.2 5.76 7.2 9.618 0 2.898-1.2 6.018-5.28 6.018-3.84 0-6.72-3.12-6.72-6.018 0-3.858 3.6-7.218 7.2-9.618-3.6-2.4-7.2-5.76-7.2-9.618z"/>
+  </svg>
+);
+
+const NodeIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#339933]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0L3 5.2v10.4L12 21l9-5.2V5.2L12 0zm7.2 14.6l-7.2 4.2-7.2-4.2V6.4l7.2-4.2 7.2 4.2v8.2z"/>
+  </svg>
+);
+
+const ExpressIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-foreground" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 10.74h-4.32l-2.07 3.32-2.12-3.32h-4.43l3.86 5.56-4.04 5.94h4.37l2.25-3.6 2.2 3.6h4.37l-4.05-5.94 3.99-5.56zm-17.76.02C2.7 10.76 0 13.07 0 16.32c0 3.35 2.87 5.92 6.32 5.92 2.76 0 4.67-1.42 5.48-3.14l-3.3-1.63c-.43.76-1.12 1.25-2.05 1.25-1.25 0-2.22-.85-2.29-2.22h7.82c.04-.26.06-.57.06-.88 0-3.15-2.31-4.86-5.8-4.86zm-2.27 4.14c.14-1.22 1-1.92 2.15-1.92 1.15 0 1.93.7 2.05 1.92h-4.2z"/>
+  </svg>
+);
+
+const MongoDBIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#47A248]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 .024c-.033 0-.066.002-.1.002C9.57.19 7.393 2.12 7.393 5.4c0 3.2 1.632 6.096 3.197 8.351l.059.088c-.689.967-1.745 2.146-2.585 3.385l-.014.023c-1.397 2.05-1.677 3.902-1.677 4.137 0 .894.629 1.458 1.458 1.458a1.353 1.353 0 0 0 1.205-.8c.036-.07.411-.806.914-1.741.002.046.005.093.007.14.072.845.698 1.482 1.482 1.482.782 0 1.408-.636 1.48-1.481l.006-.11c.421.782.748 1.401.782 1.464.21.396.611.666 1.077.666.83 0 1.458-.564 1.458-1.458 0-.236-.28-2.087-1.677-4.137l-.016-.023c-.84-1.239-1.896-2.418-2.586-3.385l.061-.088c1.565-2.255 3.197-5.15 3.197-8.351 0-3.28-2.176-5.21-4.507-5.374-.033 0-.067-.002-.1-.002zm-.095.698c1.884.148 3.524 1.657 3.524 4.678 0 2.87-1.442 5.568-2.88 7.644L12 13.918l-.55-.774c-1.437-2.076-2.879-4.774-2.879-7.644 0-3.021 1.64-4.53 3.524-4.678L12.001.71l-.096.012zm.095 13.784c.548.784 1.365 1.83 1.996 2.766-.549-.304-1.164-.46-1.996-.499v-2.267zm0 2.921c.642.029 1.134.148 1.558.337l-.872 1.597c-.015-.029-.272-.5-.686-1.258v-.676zm-1.996-.155c.631-.936 1.448-1.982 1.996-2.766v2.267c-.832.04-1.447.195-1.996.499zm1.124 2.489c-.414.759-.67 1.229-.685 1.258l-.873-1.597c.424-.189.916-.308 1.558-.337v.676z"/>
+  </svg>
+);
+
+const MySQLIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#4479A1]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.096 17.555c-1.39-.757-3.666-.827-4.48-.838-.135-.003-.267-.008-.396-.015a8.775 8.775 0 0 1-2.932-.605c-.88-.344-1.636-.889-2.28-1.644l.03-.02a9.127 9.127 0 0 0 3.32-2.846c1.176-1.576 1.76-3.4 1.74-5.422-.008-.853-.086-1.741-.453-2.528A4.475 4.475 0 0 0 11.233.957a9.387 9.387 0 0 0-4.639.63c-1.956.883-3.41 2.34-4.32 4.33a10.024 10.024 0 0 0-.916 4.673c-.006 1.157.172 2.308.53 3.42l.067.198.118-.182a9.349 9.349 0 0 1 4.542-3.619 8.272 8.272 0 0 1 2.91-.498c.18 0 .36.002.538.008 1.488.046 2.87.525 3.905 1.543a7.488 7.488 0 0 1 1.957 3.52c.19.865.215 1.758.077 2.645l-.014.088-.083-.025c-.752-.224-2.023-.42-3.134-.457-.123-.004-.247-.006-.372-.006a8.966 8.966 0 0 0-3.794.757 7.227 7.227 0 0 0-3.085 2.66c-.198.312-.36.633-.49.972l-.04.103h15.228l-.053-.13a5.952 5.952 0 0 0-.61-.132z"/>
+  </svg>
+);
+
+const GitIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#F05032]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.384 11.252L12.748.616c-.82-.82-2.152-.82-2.972 0L8.74 1.652l2.96 2.96c.725-.245 1.554-.08 2.125.49.57.57.735 1.4.49 2.125l2.96 2.96c.725-.245 1.554-.08 2.125.49.82.82.82 2.152 0 2.972a2.09 2.09 0 0 1-2.972 0c-.57-.57-.735-1.4-.49-2.125l-2.96-2.96c-.245.725-.08 1.554.49 2.125-.57-.57-.735-1.4-.49-2.125L10.51 7.64c-.245.725-.08 1.554.49 2.125.57.57.735 1.4.49 2.125l-2.96 2.96c-.245-.725-.08-1.554.49-2.125-.57.57-.735 1.4-.49 2.125L2.616 9.776c-.82-.82-.82-2.152 0-2.972l1.036-1.036-2.96-2.96c-.82.82-.82 2.152 0 2.972l10.636 10.636c.82.82 2.152.82 2.972 0l10.636-10.636c.82-.82.82-2.152 0-2.972z"/>
+  </svg>
+);
+
+const GitHubIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-foreground" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+  </svg>
+);
+
+const AppwriteIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-10 h-10 fill-[#FD366E]" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.012 3.22a8.784 8.784 0 00-6.21 2.57l1.782 1.781A6.257 6.257 0 0112 5.738a6.262 6.262 0 014.417 10.686L18.2 18.2a8.782 8.782 0 00-6.188-14.98zm3.327 3.328a4.086 4.086 0 00-2.887-1.196v2.52c.264 0 .524.053.766.157l2.121-1.481zm-7.616 1.48l2.122 1.482A2.43 2.43 0 0110.8 9.35v-2.52a4.087 4.087 0 00-3.1 1.198zM5.792 8.196L4.01 6.414A8.782 8.782 0 003.22 12c0 2.427.986 4.629 2.572 6.21l1.782-1.782A6.257 6.257 0 015.738 12c0-1.41.465-2.716 1.254-3.804zm8.625 7.608l1.482 2.121A8.756 8.756 0 0018.2 12c0-2.42-.98-4.61-2.553-6.188L13.865 7.6A6.262 6.262 0 0114.417 12c0 1.412-.46 2.71-1.242 3.804zm-1.617 1.616v-2.52a2.43 2.43 0 01-1.162-.158l-1.482 2.121a4.086 4.086 0 002.644.557z"/>
+  </svg>
+);
+
+const skillsList = [
+  { name: 'C++', icon: <CPPIcon /> },
+  { name: 'JavaScript', icon: <JSIcon /> },
+  { name: 'SQL', icon: <SQLIcon /> },
+  { name: 'HTML5', icon: <HTMLIcon /> },
+  { name: 'React.js', icon: <ReactIcon /> },
+  { name: 'Tailwind CSS', icon: <TailwindIcon /> },
+  { name: 'Node.js', icon: <NodeIcon /> },
+  { name: 'Express.js', icon: <ExpressIcon /> },
+  { name: 'MongoDB', icon: <MongoDBIcon /> },
+  { name: 'MySQL', icon: <MySQLIcon /> },
+  { name: 'Git', icon: <GitIcon /> },
+  { name: 'GitHub', icon: <GitHubIcon /> },
+  { name: 'Appwrite', icon: <AppwriteIcon /> },
 ];
 
-const SkillCard = ({ skill, index }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
+const SkillCard = ({ skill }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.87, 0, 0.13, 1] }}
-      className="group w-full h-[220px] md:h-[260px] cursor-pointer"
-      style={{ perspective: 1000 }}
-      onClick={() => setIsFlipped(!isFlipped)}
+    <div 
+      className="flex flex-col items-center justify-center p-4 bg-[#FAFAFA] rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-sm hover:-translate-y-1 transition-all duration-300 aspect-square w-[100px] sm:w-[120px] md:w-[130px] lg:w-[140px] mx-auto"
     >
-      <motion.div
-        className="relative w-full h-full rounded-2xl"
-        style={{ transformStyle: 'preserve-3d' }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
-      >
-        {/* Front Face */}
-        <div 
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#FAFAFA] rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-        >
-          <div className="text-muted group-hover:text-foreground transition-colors duration-300 mb-6">
-            {skill.icon}
-          </div>
-          <h3 className="text-lg md:text-xl font-medium tracking-tight text-center">{skill.name}</h3>
-          <span className="text-[10px] text-muted/50 uppercase tracking-widest mt-6 absolute bottom-4 md:bottom-6 opacity-0 group-hover:opacity-100 transition-opacity">Click to flip</span>
-        </div>
-
-        {/* Back Face */}
-        <div 
-          className="absolute inset-0 p-6 bg-foreground text-background rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-foreground"
-          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-        >
-          <h3 className="text-lg md:text-xl font-bold mb-4">{skill.name}</h3>
-          <p className="text-sm md:text-base opacity-90 leading-relaxed text-balance">{skill.description}</p>
-        </div>
-      </motion.div>
-    </motion.div>
+      <div className="mb-3 flex items-center justify-center h-10 w-10">
+        {skill.icon}
+      </div>
+      <h3 className="text-xs md:text-sm font-medium tracking-tight text-center text-foreground">{skill.name}</h3>
+    </div>
   );
 };
 
 const Skills = () => {
   return (
     <section className="w-full py-32 px-6 md:px-16 bg-white relative">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 text-center"
-        >
-          TECHNOLOGIES I WORK WITH
-        </motion.h2>
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 text-center">
+          TECHNICAL SKILLS
+        </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {skills.map((skill, index) => (
-            <SkillCard key={skill.name} skill={skill} index={index} />
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-5xl mx-auto">
+          {skillsList.map((skill) => (
+            <SkillCard key={skill.name} skill={skill} />
           ))}
         </div>
       </div>

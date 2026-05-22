@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { Github, Linkedin, Instagram, Mail, Phone } from 'lucide-react';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -49,6 +49,16 @@ const Hero = () => {
           >
             Building digital experiences that feel effortless and refined.
           </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.87, 0, 0.13, 1] }}
+            className="mt-4 text-base md:text-lg text-muted/80 font-medium flex items-center justify-center gap-2 hover:text-foreground transition-colors"
+          >
+            <Phone size={18} strokeWidth={1.5} className="text-muted" />
+            <a href="tel:+919710003577" className="hover:underline tracking-wide">+91 9710003577</a>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
