@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
-import mainPhoto from '../assets/mainphoto.jpg';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -28,10 +28,10 @@ const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 pt-10 lg:pt-0">
+      <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-center justify-center pt-10 lg:pt-0">
         
-        {/* Left Content */}
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:w-[55%]">
+        {/* Centered Content */}
+        <div className="flex flex-col items-center text-center w-full max-w-3xl">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.87, 0, 0.13, 1] }}
-            className="mt-8 text-lg md:text-2xl text-muted max-w-lg font-medium"
+            className="mt-8 text-lg md:text-2xl text-muted max-w-lg font-medium mx-auto"
           >
             Building digital experiences that feel effortless and refined.
           </motion.p>
@@ -54,11 +54,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.87, 0, 0.13, 1] }}
-            className="mt-12 flex flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6"
+            className="mt-12 flex flex-wrap justify-center items-center gap-4 md:gap-6"
           >
-            <a href="#work" className="px-8 py-4 bg-foreground text-background font-medium rounded-full hover:scale-105 transition-transform duration-300 text-center w-full sm:w-auto">
-              View Work
-            </a>
+            <Link to="/resume" className="px-8 py-4 bg-foreground text-background font-medium rounded-full hover:scale-105 transition-transform duration-300 text-center w-full sm:w-auto">
+              Resume
+            </Link>
             <a href="#contact" className="px-8 py-4 text-foreground font-medium rounded-full hover:bg-gray-100 transition-colors duration-300 text-center w-full sm:w-auto">
               Contact
             </a>
@@ -69,7 +69,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6, ease: [0.87, 0, 0.13, 1] }}
-            className="mt-10 flex items-center justify-center lg:justify-start gap-8 text-muted"
+            className="mt-10 flex items-center justify-center gap-8 text-muted"
           >
             <a href="https://github.com/choudharyprince03" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:-translate-y-1 transition-all duration-300" aria-label="GitHub">
               <Github size={24} strokeWidth={1.5} />
@@ -85,22 +85,6 @@ const Hero = () => {
             </a>
           </motion.div>
         </div>
-
-        {/* Right Photo */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.87, 0, 0.13, 1] }}
-          className="w-full lg:w-[40%] flex justify-center lg:justify-end mt-12 lg:mt-0"
-        >
-          <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] rounded-3xl overflow-hidden shadow-sm">
-            <img 
-              src={mainPhoto} 
-              alt="Prince Choudhary" 
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </motion.div>
 
       </div>
     </section>

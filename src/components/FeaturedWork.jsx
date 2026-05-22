@@ -1,14 +1,17 @@
-import React, { useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, X } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const projects = [
-  { id: 1, name: 'FoodZero', desc: 'Restaurant website.', videoId: 'mvL-eQaFV9g' },
-  { id: 2, name: 'Blogger', desc: 'A blogging platform.', videoId: 'CEYswTm5HAQ' },
+  { id: 1, name: 'FoodZero', desc: 'A Restaurant website.', videoId: 'mvL-eQaFV9g' },
+  { id: 2, name: 'Blogged', desc: 'Full-Stack Blogging Platform.', videoId: 'CEYswTm5HAQ' },
   { id: 3, name: 'Moneyestate', desc: 'Real estate property listing website.', videoId: 'FOh0g72TR7c' },
 ];
 
-const ProjectCard = ({ project, onSelect }) => {
+const ProjectCard = ({ project }) => {
+  const navigate = useNavigate();
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 50 }}
@@ -16,7 +19,7 @@ const ProjectCard = ({ project, onSelect }) => {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: [0.87, 0, 0.13, 1] }}
       className="group relative flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] snap-center cursor-pointer"
-      onClick={() => onSelect(project)}
+      onClick={() => navigate(`/project/${project.id}`)}
     >
       <div className="overflow-hidden bg-gray-100 rounded-lg aspect-[4/3] w-full shadow-sm group-hover:shadow-2xl transition-shadow duration-500 relative">
         <iframe 
@@ -42,7 +45,6 @@ const ProjectCard = ({ project, onSelect }) => {
 
 const FeaturedWork = () => {
   const scrollContainerRef = useRef(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
@@ -98,7 +100,7 @@ const FeaturedWork = () => {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {projects.map(project => (
-            <ProjectCard key={project.id} project={project} onSelect={setSelectedVideo} />
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 
@@ -107,44 +109,7 @@ const FeaturedWork = () => {
           ← Swipe to explore →
         </div>
 
-        {/* Video Modal */}
-        <AnimatePresence>
-          {selectedVideo && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12 bg-black/80 backdrop-blur-sm"
-              onClick={() => setSelectedVideo(null)}
-            >
-              <button 
-                className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-colors"
-                onClick={() => setSelectedVideo(null)}
-                aria-label="Close modal"
-              >
-                <X size={24} />
-              </button>
-              
-              <motion.div 
-                initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                className="relative w-full max-w-6xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
-                onClick={e => e.stopPropagation()}
-              >
-                <iframe 
-                  src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-                  allow="autoplay; encrypted-media; fullscreen"
-                  className="w-full h-full"
-                  style={{ border: 'none' }}
-                  title={selectedVideo.name}
-                  allowFullScreen
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar {
