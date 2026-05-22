@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ const projects = [
   { id: 3, name: 'Moneyestate', desc: 'Real estate property listing website.', videoId: 'FOh0g72TR7c' },
 ];
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, loadVideos }) => {
   const navigate = useNavigate();
 
   return (
@@ -22,13 +22,23 @@ const ProjectCard = ({ project }) => {
       onClick={() => navigate(`/project/${project.id}`)}
     >
       <div className="overflow-hidden bg-gray-100 rounded-lg aspect-[4/3] w-full shadow-sm group-hover:shadow-2xl transition-shadow duration-500 relative">
-        <iframe 
-          src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
-          allow="autoplay; encrypted-media"
-          className="absolute inset-0 w-full h-full scale-[1.3] pointer-events-none grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.35] transition-all duration-700 ease-out"
-          style={{ border: 'none' }}
-          title={project.name}
-        />
+        {loadVideos ? (
+          <iframe 
+            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+            allow="autoplay; encrypted-media"
+            className="absolute inset-0 w-full h-full scale-[1.3] pointer-events-none grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.35] transition-all duration-700 ease-out"
+            style={{ border: 'none' }}
+            title={project.name}
+          />
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-gray-100">
+            <img 
+              src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`} 
+              alt={project.name}
+              className="absolute inset-0 w-full h-full object-cover scale-[1.3] grayscale opacity-80 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.35]"
+            />
+          </div>
+        )}
       </div>
       <div className="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-2">
         <div>
@@ -45,6 +55,15 @@ const ProjectCard = ({ project }) => {
 
 const FeaturedWork = () => {
   const scrollContainerRef = useRef(null);
+  const [loadVideos, setLoadVideos] = useState(false);
+
+  useEffect(() => {
+    // Delay loading the heavy YouTube player scripts and iframes to ensure smooth entrance page animations
+    const timer = setTimeout(() => {
+      setLoadVideos(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
@@ -100,7 +119,7 @@ const FeaturedWork = () => {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {projects.map(project => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} loadVideos={loadVideos} />
           ))}
         </div>
 
