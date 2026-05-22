@@ -78,13 +78,13 @@ const FeaturedWork = () => {
   return (
     <section id="work" className="w-full py-32 px-6 md:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex justify-between items-center mb-16 gap-4">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold tracking-tighter"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter"
           >
             FEATURED WORK
           </motion.h2>
@@ -94,21 +94,21 @@ const FeaturedWork = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden md:flex gap-4"
+            className="flex gap-2 sm:gap-4"
           >
             <button 
               onClick={() => scroll('left')}
-              className="p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-3 md:p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Scroll left"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-3 md:p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Scroll right"
             >
-              <ArrowRight size={24} />
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </motion.div>
         </div>
