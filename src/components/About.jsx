@@ -51,6 +51,9 @@ const About = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/40 backdrop-blur-md"
             onClick={() => setIsLetterOpen(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="letter-title"
           >
             <motion.div 
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -69,9 +72,9 @@ const About = () => {
               </button>
               
               <div className="prose prose-lg text-foreground max-w-none">
-                <h3 className="text-3xl font-bold tracking-tight mb-8">A Note on Craft.</h3>
+                <h3 id="letter-title" className="text-3xl font-bold tracking-tight mb-8">A Note on Craft.</h3>
                 <p className="text-muted leading-relaxed mb-6">
-                  Design is not just what it looks like and feels like. Design is how it works. When I approach a new project, my goal is never to just write code—it's to architect an experience.
+                  Design is not just what it looks like and feels like. Design is how it works. When I approach a new project, my goal is never to just write code. It is to architect an experience.
                 </p>
                 <p className="text-muted leading-relaxed mb-6">
                   In a world full of visual noise and complex interfaces, I believe there is immense power in minimalism. Every component, every animation, and every line of text should serve a purpose. If it doesn't, it gets removed.
@@ -87,11 +90,6 @@ const About = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}} />
     </section>
   );
 };

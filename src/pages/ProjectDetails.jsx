@@ -1,43 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const projects = [
-  { id: 1, 
-    name: 'FoodZero', 
-    desc: 'A Restaurant website.', 
-    videoId: 'mvL-eQaFV9g', 
-    role: 'Frontend Developer', 
-    timeline: '2023', 
-    tools: 'React.js, Tailwind CSS, Google Sheets API', 
-    longDesc: 'Built a responsive restaurant web application using React.js and Tailwind CSS featuring dynamic menu displays, customer reviews section, and a live reservation system integrated with Google Sheets API — enabling real-time booking data collection without a backend. Achieved a clean, mobile-first UI across 3+ device breakpoints with optimized component structure for fast load performance.' },
-    
-  { id: 2,   
-    name: 'Blogged', 
-    desc: 'Full-Stack Blogging Platform.', 
-    videoId: 'CEYswTm5HAQ', 
-    role: 'Full Stack Developer', 
-    timeline: '2024', 
-    tools: 'React, Redux, Tailwind CSS, Appwrite', 
-    longDesc: 'Built a full-stack blogging platform with React, Redux, Tailwind CSS, and Appwrite, featuring secure JWT-based authentication, role-based access control (admin/reader), and full CRUD operations across 4+ content management modules (create, edit, publish, delete). Implemented image upload pipeline via Appwrite Storage, reducing manual content handling by ~40%. Deployed on Vercel with sub-2s load times and a fully responsive UI across mobile, tablet, and desktop.' },
-    
-  { id: 3, 
-    name: 'Moneyestate', 
-    desc: 'Real estate property listing website.', 
-    videoId: 'FOh0g72TR7c', 
-    role: 'Frontend Developer', 
-    timeline: '2025', 
-    tools: 'React, Framer Motion', 
-    longDesc: 'A comprehensive real estate platform for browsing, buying, and selling properties. It features a premium, modern design language, smooth page transitions, and detailed property listings to help users find their dream homes.' },
-];
+import { projects } from '../data/projects';
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const project = projects.find(p => p.id === parseInt(id));
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setIsVideoLoaded(false);
   }, [id]);
 
   if (!project) {
@@ -88,19 +62,64 @@ const ProjectDetails = () => {
           {project.name}
         </motion.h1>
         
-        <motion.p variants={itemVariants} className="text-xl md:text-2xl text-muted mb-12 max-w-3xl">
+        <motion.p variants={itemVariants} className="text-xl md:text-2xl text-muted mb-8 max-w-3xl">
           {project.desc}
         </motion.p>
+
+        <motion.div variants={itemVariants} className="mb-12 flex flex-wrap gap-4">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 font-medium text-background transition-transform hover:scale-105"
+          >
+            Live Site
+            <ExternalLink size={18} />
+          </a>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-6 py-3 font-medium text-foreground transition-colors hover:bg-white"
+          >
+            GitHub Repo
+            <Github size={18} />
+          </a>
+        </motion.div>
         
         <motion.div variants={imageVariants} className="w-full aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl mb-16 relative">
-          <iframe 
-            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-            allow="autoplay; encrypted-media; fullscreen"
-            className="absolute inset-0 w-full h-full"
-            style={{ border: 'none' }}
-            title={project.name}
-            allowFullScreen
-          />
+          {isVideoLoaded ? (
+            <iframe 
+              src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
+              allow="autoplay; encrypted-media; fullscreen"
+              className="absolute inset-0 w-full h-full"
+              style={{ border: 'none' }}
+              title={`${project.name} project video`}
+              allowFullScreen
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsVideoLoaded(true)}
+              className="group absolute inset-0 w-full h-full overflow-hidden text-left"
+              aria-label={`Play ${project.name} project video`}
+            >
+              <img
+                src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
+                alt={`${project.name} project video thumbnail`}
+                className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+              />
+              <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" aria-hidden="true" />
+              <span className="absolute inset-0 flex items-center justify-center">
+                <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white text-foreground shadow-2xl transition-transform group-hover:scale-110">
+                  <Play size={32} fill="currentColor" className="ml-1" />
+                </span>
+              </span>
+              <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/20 bg-white/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
+                Click to load and play the project video.
+              </span>
+            </button>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
@@ -115,7 +134,7 @@ const ProjectDetails = () => {
             <motion.div variants={itemVariants} className="mt-8">
               <h3 className="text-xl font-bold mb-4">The Challenge</h3>
               <p className="text-lg text-muted leading-relaxed">
-                The primary goal was to create an interface that felt both dynamic and premium. This involved careful attention to typography, spacing, and micro-interactions. The challenge was to balance rich media integration without compromising on performance, ensuring a seamless experience across all devices.
+                {project.challenge}
               </p>
             </motion.div>
           </div>
@@ -132,6 +151,19 @@ const ProjectDetails = () => {
             <div>
               <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Technologies</span>
               <span className="text-lg font-medium">{project.tools}</span>
+            </div>
+            <div>
+              <span className="text-muted block text-sm uppercase tracking-widest mb-3 font-semibold">Links</span>
+              <div className="flex flex-col items-start gap-3">
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-muted transition-colors">
+                  Open live website
+                  <ExternalLink size={16} />
+                </a>
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-muted transition-colors">
+                  View source code
+                  <Github size={16} />
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>

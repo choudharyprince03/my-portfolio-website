@@ -9,6 +9,7 @@ const Contact = () => {
     setStatus("submitting");
     const formData = new FormData(event.target);
     formData.append("access_key", "365d06c2-72b9-45de-862e-da3e54a971f6");
+    formData.append("subject", "New portfolio message for Prince Choudhary");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -51,25 +52,34 @@ const Contact = () => {
           onSubmit={onSubmit}
         >
           <div className="relative">
+            <label htmlFor="name" className="sr-only">Your Name</label>
             <input 
+              id="name"
               type="text" 
               name="name"
               required
+              autoComplete="name"
               placeholder="Your Name" 
               className="w-full bg-transparent border-b-2 border-gray-200 py-4 text-xl focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
             />
           </div>
           <div className="relative">
+            <label htmlFor="email" className="sr-only">Your Email</label>
             <input 
+              id="email"
               type="email" 
               name="email"
               required
+              autoComplete="email"
               placeholder="Your Email" 
               className="w-full bg-transparent border-b-2 border-gray-200 py-4 text-xl focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
             />
           </div>
+          <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
           <div className="relative">
+            <label htmlFor="message" className="sr-only">Your Message</label>
             <textarea 
+              id="message"
               name="message"
               required
               placeholder="Your Message" 

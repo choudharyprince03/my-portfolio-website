@@ -113,8 +113,11 @@ const SkillCard = ({ skill }) => {
 
 const Skills = () => {
   return (
-    <section className="w-full py-32 px-6 md:px-16 bg-white relative">
+    <section id="skills" className="w-full py-28 md:py-32 px-6 md:px-16 bg-white relative">
       <div className="max-w-6xl mx-auto">
+        <p className="mb-4 text-center text-sm font-semibold uppercase tracking-widest text-muted">
+          Tools I use
+        </p>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 text-center">
           TECHNICAL SKILLS
         </h2>
