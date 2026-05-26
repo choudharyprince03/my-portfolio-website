@@ -88,37 +88,45 @@ const ProjectDetails = () => {
         </motion.div>
         
         <motion.div variants={imageVariants} className="w-full aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl mb-16 relative">
-          {isVideoLoaded ? (
-            <iframe 
-              src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-              allow="autoplay; encrypted-media; fullscreen"
-              className="absolute inset-0 w-full h-full"
-              style={{ border: 'none' }}
-              title={`${project.name} project video`}
-              allowFullScreen
-            />
-          ) : (
-            <button
-              type="button"
-              onClick={() => setIsVideoLoaded(true)}
-              className="group absolute inset-0 w-full h-full overflow-hidden text-left"
-              aria-label={`Play ${project.name} project video`}
-            >
-              <img
-                src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
-                alt={`${project.name} project video thumbnail`}
-                className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+          {project.videoId ? (
+            isVideoLoaded ? (
+              <iframe 
+                src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
+                allow="autoplay; encrypted-media; fullscreen"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 'none' }}
+                title={`${project.name} project video`}
+                allowFullScreen
               />
-              <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" aria-hidden="true" />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white text-foreground shadow-2xl transition-transform group-hover:scale-110">
-                  <Play size={32} fill="currentColor" className="ml-1" />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsVideoLoaded(true)}
+                className="group absolute inset-0 w-full h-full overflow-hidden text-left"
+                aria-label={`Play ${project.name} project video`}
+              >
+                <img
+                  src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
+                  alt={`${project.name} project video thumbnail`}
+                  className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                />
+                <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" aria-hidden="true" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white text-foreground shadow-2xl transition-transform group-hover:scale-110">
+                    <Play size={32} fill="currentColor" className="ml-1" />
+                  </span>
                 </span>
-              </span>
-              <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/20 bg-white/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
-                Click to load and play the project video.
-              </span>
-            </button>
+                <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/20 bg-white/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
+                  Click to load and play the project video.
+                </span>
+              </button>
+            )
+          ) : (
+            <img
+              src={project.image}
+              alt={`${project.name} project preview`}
+              className="absolute inset-0 h-full w-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-102 hover:grayscale-0"
+            />
           )}
         </motion.div>
 

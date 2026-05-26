@@ -28,7 +28,7 @@ const ProjectCard = ({ project }) => {
     >
       <div className="overflow-hidden bg-gray-100 rounded-lg aspect-[4/3] w-full shadow-sm group-hover:shadow-2xl transition-shadow duration-500 relative">
         <img 
-          src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`} 
+          src={project.videoId ? `https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg` : project.image} 
           alt={`${project.name} project preview`}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover scale-[1.3] grayscale opacity-80 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.35]"
