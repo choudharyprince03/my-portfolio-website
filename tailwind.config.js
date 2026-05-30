@@ -10,9 +10,13 @@ export default {
         sans: ['Inter', 'SF Pro Display', 'sans-serif'],
       },
       colors: {
-        background: '#FAFAFA',
-        foreground: '#111111',
-        muted: '#A1A1AA',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+        muted: 'var(--color-muted)',
+        surface: 'var(--color-surface)',
+        'surface-hover': 'var(--color-surface-hover)',
+        border: 'var(--color-border)',
+        'border-hover': 'var(--color-border-hover)',
       },
       transitionTimingFunction: {
         'cinematic': 'cubic-bezier(0.87, 0, 0.13, 1)',

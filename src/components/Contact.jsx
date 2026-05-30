@@ -31,14 +31,14 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full py-32 px-8 sm:px-12 md:px-16 bg-white">
+    <section id="contact" className="w-full py-32 px-8 sm:px-12 md:px-16 bg-surface">
       <div className="max-w-3xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-[clamp(2.5rem,8vw,4.5rem)] font-bold tracking-tighter mb-16 text-center leading-tight"
+          className="text-[clamp(2.5rem,8vw,4.5rem)] font-bold tracking-tighter mb-16 text-center leading-tight text-foreground"
         >
           LET'S BUILD SOMETHING MEANINGFUL.
         </motion.h2>
@@ -60,7 +60,7 @@ const Contact = () => {
               required
               autoComplete="name"
               placeholder="Your Name" 
-              className="w-full bg-transparent border-b-2 border-gray-200 py-4 text-xl focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
+              className="w-full bg-transparent border-b-2 border-border py-4 text-xl text-foreground focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
             />
           </div>
           <div className="relative">
@@ -72,7 +72,7 @@ const Contact = () => {
               required
               autoComplete="email"
               placeholder="Your Email" 
-              className="w-full bg-transparent border-b-2 border-gray-200 py-4 text-xl focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
+              className="w-full bg-transparent border-b-2 border-border py-4 text-xl text-foreground focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted"
             />
           </div>
           <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
@@ -84,7 +84,7 @@ const Contact = () => {
               required
               placeholder="Your Message" 
               rows="4"
-              className="w-full bg-transparent border-b-2 border-gray-200 py-4 text-xl focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted resize-none"
+              className="w-full bg-transparent border-b-2 border-border py-4 text-xl text-foreground focus:outline-none focus:border-foreground transition-colors duration-300 placeholder-muted resize-none"
             />
           </div>
           <div className="text-center pt-8">
@@ -103,7 +103,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="absolute -bottom-16 left-0 right-0 text-center text-green-600 font-medium"
+                className="absolute -bottom-16 left-0 right-0 text-center text-green-500 font-medium"
               >
                 Message sent successfully! I'll get back to you soon.
               </motion.div>
@@ -113,7 +113,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="absolute -bottom-16 left-0 right-0 text-center text-red-500 font-medium"
+                className="absolute -bottom-16 left-0 right-0 text-center text-red-400 font-medium"
               >
                 Something went wrong. Please try again later.
               </motion.div>

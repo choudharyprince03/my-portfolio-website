@@ -18,7 +18,7 @@ const Hero = () => {
   return (
     <section className="relative w-full min-h-[100svh] px-6 md:px-16 py-6 md:py-8 overflow-hidden">
       <motion.div 
-        className="absolute top-[12%] left-[-12%] w-[80vw] lg:w-[48vw] aspect-square bg-white rounded-[40%] pointer-events-none"
+        className="absolute top-[12%] left-[-12%] w-[80vw] lg:w-[48vw] aspect-square bg-surface rounded-[40%] pointer-events-none"
         style={{ 
           y: y1,
           rotate: -15,
@@ -26,7 +26,7 @@ const Hero = () => {
         }}
       />
       <motion.div 
-        className="absolute bottom-[8%] right-[-18%] w-[72vw] lg:w-[42vw] aspect-square bg-white rounded-[45%] pointer-events-none"
+        className="absolute bottom-[8%] right-[-18%] w-[72vw] lg:w-[42vw] aspect-square bg-surface rounded-[45%] pointer-events-none"
         style={{ 
           y: y2,
           rotate: 20,
@@ -41,7 +41,7 @@ const Hero = () => {
           transition={{ duration: 0.7, ease: [0.87, 0, 0.13, 1] }}
           className="flex items-center justify-between gap-4"
         >
-          <a href="/" className="font-bold tracking-tight text-sm sm:text-base">
+          <a href="/" className="font-bold tracking-tight text-sm sm:text-base text-foreground">
             PC
           </a>
           <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-7 text-sm font-medium text-muted">
@@ -63,7 +63,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.87, 0, 0.13, 1] }}
-              className="mb-6 inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white/70 px-4 py-2 text-sm font-medium text-muted shadow-sm backdrop-blur"
+              className="mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-surface/70 px-4 py-2 text-sm font-medium text-muted shadow-sm backdrop-blur"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
               Software Engineer & Web Developer
@@ -73,7 +73,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.87, 0, 0.13, 1] }}
-              className="text-[clamp(3.4rem,10vw,8.5rem)] font-bold tracking-tighter leading-[0.88]"
+              className="text-[clamp(3.4rem,10vw,8.5rem)] font-bold tracking-tighter leading-[0.88] text-foreground"
           >
             PRINCE<br />CHOUDHARY
           </motion.h1>
@@ -113,7 +113,7 @@ const Hero = () => {
                 View Work
                 <ArrowDown size={18} strokeWidth={1.8} />
               </a>
-              <Link to="/resume" className="w-full sm:w-auto rounded-full border border-gray-200 bg-white/70 px-8 py-4 text-center font-medium text-foreground transition-colors duration-300 hover:bg-white">
+              <Link to="/resume" className="w-full sm:w-auto rounded-full border border-border bg-surface/70 px-8 py-4 text-center font-medium text-foreground transition-colors duration-300 hover:bg-surface">
               Resume
             </Link>
           </motion.div>
@@ -142,7 +142,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.75, ease: [0.87, 0, 0.13, 1] }}
-              className="mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-gray-200 pt-6"
+              className="mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-border pt-6"
             >
               {[
                 ['3+', 'Projects'],
@@ -151,7 +151,7 @@ const Hero = () => {
               ].map(([value, label]) => (
                 <div key={label}>
                   <dt className="text-xs font-semibold uppercase tracking-widest text-muted">{label}</dt>
-                  <dd className="mt-2 text-2xl font-bold tracking-tight">{value}</dd>
+                  <dd className="mt-2 text-2xl font-bold tracking-tight text-foreground">{value}</dd>
                 </div>
               ))}
             </motion.dl>

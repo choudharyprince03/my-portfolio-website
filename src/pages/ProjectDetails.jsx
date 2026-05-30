@@ -58,7 +58,7 @@ const ProjectDetails = () => {
           </Link>
         </motion.div>
         
-        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
+        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-foreground">
           {project.name}
         </motion.h1>
         
@@ -80,14 +80,14 @@ const ProjectDetails = () => {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-6 py-3 font-medium text-foreground transition-colors hover:bg-white"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-6 py-3 font-medium text-foreground transition-colors hover:bg-surface"
           >
             GitHub Repo
             <Github size={18} />
           </a>
         </motion.div>
         
-        <motion.div variants={imageVariants} className="w-full aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl mb-16 relative">
+        <motion.div variants={imageVariants} className="w-full aspect-video bg-surface-hover rounded-2xl overflow-hidden shadow-2xl mb-16 relative">
           {project.videoId ? (
             isVideoLoaded ? (
               <iframe 
@@ -112,11 +112,11 @@ const ProjectDetails = () => {
                 />
                 <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" aria-hidden="true" />
                 <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white text-foreground shadow-2xl transition-transform group-hover:scale-110">
+                  <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-surface text-foreground shadow-2xl transition-transform group-hover:scale-110">
                     <Play size={32} fill="currentColor" className="ml-1" />
                   </span>
                 </span>
-                <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/20 bg-white/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
+                <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-border bg-surface/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
                   Click to load and play the project video.
                 </span>
               </button>
@@ -133,14 +133,14 @@ const ProjectDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
           <div className="md:col-span-2">
             <motion.div variants={itemVariants}>
-              <h2 className="text-3xl font-bold mb-6 tracking-tight">About the Project</h2>
+              <h2 className="text-3xl font-bold mb-6 tracking-tight text-foreground">About the Project</h2>
               <p className="text-lg text-muted leading-relaxed">
                 {project.longDesc}
               </p>
             </motion.div>
             
             <motion.div variants={itemVariants} className="mt-8">
-              <h3 className="text-xl font-bold mb-4">The Challenge</h3>
+              <h3 className="text-xl font-bold mb-4 text-foreground">The Challenge</h3>
               <p className="text-lg text-muted leading-relaxed">
                 {project.challenge}
               </p>
@@ -150,24 +150,24 @@ const ProjectDetails = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
               <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Role</span>
-              <span className="text-lg font-medium">{project.role}</span>
+              <span className="text-lg font-medium text-foreground">{project.role}</span>
             </div>
             <div>
               <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Timeline</span>
-              <span className="text-lg font-medium">{project.timeline}</span>
+              <span className="text-lg font-medium text-foreground">{project.timeline}</span>
             </div>
             <div>
               <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Technologies</span>
-              <span className="text-lg font-medium">{project.tools}</span>
+              <span className="text-lg font-medium text-foreground">{project.tools}</span>
             </div>
             <div>
               <span className="text-muted block text-sm uppercase tracking-widest mb-3 font-semibold">Links</span>
               <div className="flex flex-col items-start gap-3">
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-muted transition-colors">
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-foreground hover:text-muted transition-colors">
                   Open live website
                   <ExternalLink size={16} />
                 </a>
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-muted transition-colors">
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-foreground hover:text-muted transition-colors">
                   View source code
                   <Github size={16} />
                 </a>
@@ -176,6 +176,8 @@ const ProjectDetails = () => {
           </motion.div>
         </div>
       </motion.div>
+      {/* Spacer for dock */}
+      <div className="dock-spacer" />
     </div>
   );
 };

@@ -26,7 +26,7 @@ const ProjectCard = ({ project }) => {
       tabIndex={0}
       aria-label={`Open ${project.name} project details`}
     >
-      <div className="overflow-hidden bg-gray-100 rounded-lg aspect-[4/3] w-full shadow-sm group-hover:shadow-2xl transition-shadow duration-500 relative">
+      <div className="overflow-hidden bg-surface-hover rounded-lg aspect-[4/3] w-full shadow-sm group-hover:shadow-2xl transition-shadow duration-500 relative">
         <img 
           src={project.videoId ? `https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg` : project.image} 
           alt={`${project.name} project preview`}
@@ -36,13 +36,13 @@ const ProjectCard = ({ project }) => {
       </div>
       <div className="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h3 className="text-2xl font-bold tracking-tight group-hover:text-muted transition-colors">
+          <h3 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-muted transition-colors">
             {project.name}
           </h3>
           <p className="text-muted mt-1 max-w-xl">{project.summary}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {project.tools.split(', ').slice(0, 3).map((tool) => (
-              <span key={tool} className="rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-muted">
+              <span key={tool} className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted">
                 {tool}
               </span>
             ))}
@@ -63,14 +63,14 @@ const ProjectCard = ({ project }) => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(event) => event.stopPropagation()}
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-white"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface"
             >
               GitHub
               <Github size={15} />
             </a>
           </div>
         </div>
-        <span className="inline-flex items-center gap-2 text-sm font-medium tracking-wide opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition-all duration-300">
+        <span className="inline-flex items-center gap-2 text-sm font-medium tracking-wide text-foreground opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition-all duration-300">
           Explore
           <ExternalLink size={16} />
         </span>
@@ -111,7 +111,7 @@ const FeaturedWork = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-foreground"
             >
               FEATURED WORK
             </motion.h2>
@@ -126,14 +126,14 @@ const FeaturedWork = () => {
           >
             <button 
               onClick={() => scroll('left')}
-              className="p-3 md:p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-3 md:p-4 rounded-full border border-border hover:bg-surface-hover transition-colors text-foreground"
               aria-label="Scroll left"
             >
               <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-3 md:p-4 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-3 md:p-4 rounded-full border border-border hover:bg-surface-hover transition-colors text-foreground"
               aria-label="Scroll right"
             >
               <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />

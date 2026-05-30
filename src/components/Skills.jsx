@@ -101,7 +101,7 @@ const skillsList = [
 const SkillCard = ({ skill }) => {
   return (
     <div 
-      className="flex flex-col items-center justify-center p-4 bg-[#FAFAFA] rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-sm hover:-translate-y-1 transition-all duration-300 aspect-square w-[100px] sm:w-[120px] md:w-[130px] lg:w-[140px] mx-auto"
+      className="flex flex-col items-center justify-center p-4 bg-surface rounded-2xl border border-border hover:border-border-hover hover:shadow-lg hover:-translate-y-1 transition-all duration-300 aspect-square w-[100px] sm:w-[120px] md:w-[130px] lg:w-[140px] mx-auto"
     >
       <div className="mb-3 flex items-center justify-center h-10 w-10">
         {skill.icon}
@@ -113,12 +113,12 @@ const SkillCard = ({ skill }) => {
 
 const Skills = () => {
   return (
-    <section id="skills" className="w-full py-28 md:py-32 px-6 md:px-16 bg-white relative">
+    <section id="skills" className="w-full py-28 md:py-32 px-6 md:px-16 bg-surface relative">
       <div className="max-w-6xl mx-auto">
         <p className="mb-4 text-center text-sm font-semibold uppercase tracking-widest text-muted">
           Tools I use
         </p>
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 text-center text-foreground">
           TECHNICAL SKILLS
         </h2>
 

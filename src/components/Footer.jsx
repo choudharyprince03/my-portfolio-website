@@ -18,8 +18,8 @@ const HoverLink = ({ href, label, hoverText }) => (
 
 const Footer = () => {
   return (
-    <footer className="w-full py-16 px-6 md:px-16 border-t border-gray-100 flex flex-col lg:flex-row items-center justify-between gap-10">
-      <div className="font-bold tracking-tight text-lg">
+    <footer className="w-full py-16 px-6 md:px-16 border-t border-border flex flex-col lg:flex-row items-center justify-between gap-10">
+      <div className="font-bold tracking-tight text-lg text-foreground">
         PRINCE CHOUDHARY
       </div>
       

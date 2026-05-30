@@ -8,13 +8,15 @@ import Footer from '../components/Footer';
 
 function Home() {
   return (
-    <main className="w-full min-h-screen bg-background text-foreground relative selection:bg-foreground selection:text-background">
+    <main className="w-full min-h-screen bg-background text-foreground relative">
       <Hero />
       <FeaturedWork />
       <Skills />
       <About />
       <Contact />
       <Footer />
+      {/* Spacer so the dock doesn't overlap the footer */}
+      <div className="dock-spacer" />
     </main>
   );
 }

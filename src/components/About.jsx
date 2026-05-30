@@ -13,7 +13,7 @@ const About = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="absolute -top-20 -left-20 w-64 h-64 bg-gray-100 rounded-full blur-3xl -z-10"
+          className="absolute -top-20 -left-20 w-64 h-64 bg-surface-hover rounded-full blur-3xl -z-10"
         />
         
         <motion.p 
@@ -60,7 +60,7 @@ const About = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-[#FAFAFA] rounded-2xl shadow-2xl p-8 md:p-16 text-left hide-scrollbar"
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-surface rounded-2xl shadow-2xl p-8 md:p-16 text-left hide-scrollbar border border-border"
               onClick={e => e.stopPropagation()}
             >
               <button 
@@ -71,8 +71,8 @@ const About = () => {
                 <X size={24} />
               </button>
               
-              <div className="prose prose-lg text-foreground max-w-none">
-                <h3 id="letter-title" className="text-3xl font-bold tracking-tight mb-8">A Note on Craft.</h3>
+              <div className="prose prose-lg max-w-none">
+                <h3 id="letter-title" className="text-3xl font-bold tracking-tight mb-8 text-foreground">A Note on Craft.</h3>
                 <p className="text-muted leading-relaxed mb-6">
                   Design is not just what it looks like and feels like. Design is how it works. When I approach a new project, my goal is never to just write code. It is to architect an experience.
                 </p>
