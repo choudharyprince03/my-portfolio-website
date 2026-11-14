@@ -6,12 +6,12 @@ import Doodle from './Doodle';
 export default function Hero() {
   return (
     <section id="hero" data-sc-act="flow" data-sc-drift="#FAFAFB" className="relative overflow-hidden">
-      <div className="relative flex min-h-[100svh] flex-col pb-8 pt-24">
-        <Doodle name="sparkle" delay={0.6} className="absolute right-[10%] top-[18%] hidden h-24 w-24 md:block" />
-        <Doodle name="cross" delay={0.9} className="absolute right-[24%] top-[14%] hidden h-8 w-8 md:block" />
-        <Doodle name="loop" delay={1.1} className="absolute right-[7%] top-[46%] hidden h-24 w-36 md:block" />
-        <Doodle name="burst" delay={1.3} className="absolute right-[30%] top-[36%] hidden h-10 w-10 lg:block" />
-        <div className="sc-wrap grid h-full grid-rows-[auto_1fr_auto] gap-6">
+      <div className="relative flex min-h-[100svh] flex-col pb-8 pt-32 sm:pt-36 md:pt-40 lg:pt-44">
+        <Doodle name="sparkle" delay={0.6} className="absolute right-[10%] top-[24%] hidden h-24 w-24 md:block" />
+        <Doodle name="cross" delay={0.9} className="absolute right-[24%] top-[20%] hidden h-8 w-8 md:block" />
+        <Doodle name="loop" delay={1.1} className="absolute right-[7%] top-[50%] hidden h-24 w-36 md:block" />
+        <Doodle name="burst" delay={1.3} className="absolute right-[30%] top-[40%] hidden h-10 w-10 lg:block" />
+        <div className="sc-wrap grid h-full grid-rows-[auto_1fr_auto] gap-6 md:gap-8">
           <p data-sc-in className="eyebrow flex flex-wrap gap-x-6 gap-y-1">
             <span>{profile.role}</span><span>{profile.company}</span><span>Portfolio {profile.year}</span>
           </p>
