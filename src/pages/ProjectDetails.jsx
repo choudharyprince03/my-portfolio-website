@@ -1,185 +1,179 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Github, Play } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, ExternalLink, Github, GitBranch, Play } from 'lucide-react';
+import ProjectCover from '../components/ProjectCover';
 import { projects } from '../data/projects';
 
-const ProjectDetails = () => {
+const storyFields = [
+  { key: 'problem', num: '01', label: 'The Problem' },
+  { key: 'users', num: '02', label: 'Users & Pain Points' },
+  { key: 'businessContext', num: '03', label: 'Business Context' },
+  { key: 'researchInsights', num: '04', label: 'Research & Insights' },
+  { key: 'strategy', num: '05', label: 'Product Strategy' },
+  { key: 'tradeOffs', num: '06', label: 'Decisions & Trade-Offs' },
+  { key: 'execution', num: '07', label: 'Execution & Implementation' },
+  { key: 'outcome', num: '08', label: 'Outcome' },
+  { key: 'learnings', num: '09', label: 'Key Learnings' },
+];
+
+export default function ProjectDetails() {
   const { id } = useParams();
-  const project = projects.find(p => p.id === parseInt(id));
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const project = projects.find((p) => p.id === parseInt(id, 10));
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setIsVideoLoaded(false);
   }, [id]);
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground">
-        <h2 className="text-3xl font-bold mb-4">Project not found</h2>
-        <Link to="/" className="text-muted hover:text-foreground transition-colors inline-flex items-center gap-2">
-          <ArrowLeft size={20} /> Return to Home
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--paper)] px-6 text-[var(--ink)]">
+        <h1 className="mb-4 display text-3xl">Case study not found</h1>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 font-mono text-sm text-[var(--accent)] hover:underline"
+        >
+          <ArrowLeft size={18} />
+          Return to portfolio
         </Link>
       </div>
     );
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] } }
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: [0.21, 0.47, 0.32, 0.98] } }
-  };
-
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20 overflow-hidden">
-      <motion.div 
-        className="max-w-7xl mx-auto px-6 md:px-16 pt-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+    <div className="min-h-screen bg-[var(--paper)] pb-24 text-[var(--ink)]">
+      <div
+        className="mx-auto max-w-6xl px-6 pt-12 md:px-12"
       >
-        <motion.div variants={itemVariants}>
-          <Link to="/" className="inline-flex items-center gap-2 mb-12 text-muted hover:text-foreground transition-colors group">
-            <ArrowLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium tracking-wide">BACK TO HOME</span>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--line)] pb-6">
+          <Link
+            to="/#work"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+          >
+            <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
+            <span>Back to case studies</span>
           </Link>
-        </motion.div>
-        
-        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-foreground">
-          {project.name}
-        </motion.h1>
-        
-        <motion.p variants={itemVariants} className="text-xl md:text-2xl text-muted mb-8 max-w-3xl">
-          {project.desc}
-        </motion.p>
-
-        <motion.div variants={itemVariants} className="mb-12 flex flex-wrap gap-4">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 font-medium text-background transition-transform hover:scale-105"
-          >
-            Live Site
-            <ExternalLink size={18} />
-          </a>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-6 py-3 font-medium text-foreground transition-colors hover:bg-surface"
-          >
-            GitHub Repo
-            <Github size={18} />
-          </a>
-        </motion.div>
-        
-        <motion.div variants={imageVariants} className="w-full aspect-video bg-surface-hover rounded-2xl overflow-hidden shadow-2xl mb-16 relative">
-          {project.videoId ? (
-            isVideoLoaded ? (
-              <iframe 
-                src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-                allow="autoplay; encrypted-media; fullscreen"
-                className="absolute inset-0 w-full h-full"
-                style={{ border: 'none' }}
-                title={`${project.name} project video`}
-                allowFullScreen
-              />
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsVideoLoaded(true)}
-                className="group absolute inset-0 w-full h-full overflow-hidden text-left"
-                aria-label={`Play ${project.name} project video`}
-              >
-                <img
-                  src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
-                  alt={`${project.name} project video thumbnail`}
-                  className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                />
-                <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" aria-hidden="true" />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-surface text-foreground shadow-2xl transition-transform group-hover:scale-110">
-                    <Play size={32} fill="currentColor" className="ml-1" />
-                  </span>
-                </span>
-                <span className="absolute bottom-6 left-6 right-6 rounded-lg border border-border bg-surface/85 px-5 py-4 text-sm font-medium text-foreground shadow-lg backdrop-blur md:left-auto md:right-6 md:max-w-sm">
-                  Click to load and play the project video.
-                </span>
-              </button>
-            )
-          ) : (
-            <img
-              src={project.image}
-              alt={`${project.name} project preview`}
-              className="absolute inset-0 h-full w-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-102 hover:grayscale-0"
-            />
-          )}
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
-          <div className="md:col-span-2">
-            <motion.div variants={itemVariants}>
-              <h2 className="text-3xl font-bold mb-6 tracking-tight text-foreground">About the Project</h2>
-              <p className="text-lg text-muted leading-relaxed">
-                {project.longDesc}
-              </p>
-            </motion.div>
-            
-            <motion.div variants={itemVariants} className="mt-8">
-              <h3 className="text-xl font-bold mb-4 text-foreground">The Challenge</h3>
-              <p className="text-lg text-muted leading-relaxed">
-                {project.challenge}
-              </p>
-            </motion.div>
-          </div>
-          
-          <motion.div variants={itemVariants} className="space-y-8">
-            <div>
-              <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Role</span>
-              <span className="text-lg font-medium text-foreground">{project.role}</span>
-            </div>
-            <div>
-              <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Timeline</span>
-              <span className="text-lg font-medium text-foreground">{project.timeline}</span>
-            </div>
-            <div>
-              <span className="text-muted block text-sm uppercase tracking-widest mb-2 font-semibold">Technologies</span>
-              <span className="text-lg font-medium text-foreground">{project.tools}</span>
-            </div>
-            <div>
-              <span className="text-muted block text-sm uppercase tracking-widest mb-3 font-semibold">Links</span>
-              <div className="flex flex-col items-start gap-3">
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-foreground hover:text-muted transition-colors">
-                  Open live website
-                  <ExternalLink size={16} />
-                </a>
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-foreground hover:text-muted transition-colors">
-                  View source code
-                  <Github size={16} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
+          <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)]">
+            {project.category} · {project.timeline}
+          </span>
         </div>
-      </motion.div>
-      {/* Spacer for dock */}
-      <div className="dock-spacer" />
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <h1 className="display text-[clamp(2.6rem,6vw,5rem)] leading-[0.96] tracking-[-0.03em] text-[var(--ink)]">
+              {project.name}
+            </h1>
+            <p className="mt-4 max-w-[54ch] text-lg leading-relaxed text-[var(--muted)] sm:text-xl">
+              {project.tagline || project.desc}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-solid"
+              >
+                Live site
+                <ExternalLink size={16} />
+              </a>
+            )}
+            {project.videoId && (
+              <a
+                href={`https://www.youtube.com/watch?v=${project.videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-line"
+              >
+                Watch walkthrough
+                <Play size={14} />
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-line"
+              >
+                GitHub repo
+                <Github size={16} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Cover */}
+        <div className="mt-10">
+          <ProjectCover project={project} />
+        </div>
+
+        {/* Metadata Strip */}
+        <dl className="mt-10 grid gap-4 rounded-2xl border border-[var(--line)] bg-[var(--paper-2)] p-6 sm:grid-cols-3">
+          <div>
+            <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-[var(--accent)]">
+              Role
+            </dt>
+            <dd className="mt-1.5 text-base font-medium text-[var(--ink)]">{project.role}</dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-[var(--accent)]">
+              Timeline
+            </dt>
+            <dd className="mt-1.5 text-base font-medium text-[var(--ink)]">{project.timeline}</dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-[var(--accent)]">
+              Stack &amp; Focus
+            </dt>
+            <dd className="mt-1.5 text-sm leading-relaxed text-[var(--muted)]">{project.tools}</dd>
+          </div>
+        </dl>
+
+        {/* System Flow Diagram */}
+        {project.flow && (
+          <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[var(--paper-2)] p-6 sm:p-8">
+            <p className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)]">
+              <GitBranch size={14} />
+              Product Flow Architecture
+            </p>
+            <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {project.flow.map((node) => (
+                <li key={node.step} className="rounded-xl border border-[var(--line)] bg-[var(--paper)] p-4">
+                  <span className="font-mono text-xs text-[var(--accent)]">STEP {node.step}</span>
+                  <p className="mt-2 display text-base font-semibold text-[var(--ink)]">
+                    {node.label}
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">{node.detail}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        {/* 9-Part Case Study Breakdown */}
+        {project.story && (
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {storyFields.map((field) => (
+              <div
+                key={field.key}
+                className="rounded-2xl border border-[var(--line)] bg-[var(--paper-2)] p-6"
+              >
+                <div className="flex items-center justify-between border-b border-[var(--line)] pb-3">
+                  <h2 className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--ink)]">
+                    {field.label}
+                  </h2>
+                  <span className="font-mono text-xs text-[var(--accent)]">{field.num}</span>
+                </div>
+                <p className="mt-3.5 text-sm leading-relaxed text-[var(--muted)]">
+                  {project.story[field.key]}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
-};
-
-export default ProjectDetails;
+}

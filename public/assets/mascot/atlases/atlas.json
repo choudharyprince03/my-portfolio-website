@@ -1,0 +1,16 @@
+{
+  "frameWidth": 208,
+  "frameHeight": 200,
+  "frames": [
+    "idle-neutral",
+    "thinking-curious",
+    "thinking-eureka",
+    "typing-base",
+    "headphones-chill",
+    "strained-effort",
+    "celebrate-sparks",
+    "approve-thumbsup",
+    "happy-hearts",
+    "happy-radiant"
+  ]
+}

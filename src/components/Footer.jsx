@@ -1,41 +1,44 @@
 import React from 'react';
+import { profile } from '../data/content';
 
-const HoverLink = ({ href, label, hoverText }) => (
-  <a 
-    href={href} 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="group relative grid overflow-hidden font-medium text-muted hover:text-foreground transition-colors duration-500"
-  >
-    <span className="col-start-1 row-start-1 place-self-center transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] group-hover:-translate-y-[150%]">
-      {label}
-    </span>
-    <span className="col-start-1 row-start-1 place-self-center transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] translate-y-[150%] group-hover:translate-y-0 text-foreground font-semibold">
-      {hoverText || label}
-    </span>
-  </a>
-);
+const links = [
+  { label: 'LinkedIn', href: profile.linkedin },
+  { label: 'GitHub', href: profile.github },
+  { label: 'Instagram', href: profile.instagram },
+  { label: 'Email', href: `mailto:${profile.email}` },
+];
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="w-full py-16 px-6 md:px-16 border-t border-border flex flex-col lg:flex-row items-center justify-between gap-10">
-      <div className="font-bold tracking-tight text-lg text-foreground">
-        PRINCE CHOUDHARY
-      </div>
-      
-      <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm tracking-widest">
-        <HoverLink href="https://wa.me/919710003577" label="WHATSAPP" hoverText="+91 9710003577" />
-        <HoverLink href="mailto:prince.1978choudhary@gmail.com" label="EMAIL" hoverText="SEND MESSAGE" />
-        <HoverLink href="https://linkedin.com/in/choudharyprince03" label="LINKEDIN" hoverText="@CHOUDHARYPRINCE03" />
-        <HoverLink href="https://github.com/choudharyprince03" label="GITHUB" hoverText="@CHOUDHARYPRINCE03" />
-        <HoverLink href="https://instagram.com/princechoudharyy05" label="INSTAGRAM" hoverText="@PRINCECHOUDHARYY05" />
-      </div>
+    <footer className="dark-zone border-t border-[#FAFAFB]/15 bg-[#1B1B1B] py-8 text-[#FAFAFB]">
+      <div className="sc-wrap flex flex-col items-center justify-between gap-5 md:flex-row">
+        <div className="flex items-center gap-3">
+          <p className="display text-2xl">
+            {profile.name}
+            <span className="text-[var(--accent)]">.</span>
+          </p>
+          <span className="font-mono text-xs text-[#FAFAFB]/60">{profile.year}</span>
+        </div>
 
-      <div className="text-sm text-muted font-medium">
-        © {new Date().getFullYear()}. All rights reserved.
+        <ul className="flex flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-[#FAFAFB]/60">
+          {links.map((l) => (
+            <li key={l.label}>
+              <a
+                href={l.href}
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="ulink hover:text-[#FAFAFB]"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p className="font-mono text-xs text-[#FAFAFB]/60">
+          {profile.role} · {profile.company}
+        </p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
