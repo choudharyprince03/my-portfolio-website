@@ -73,7 +73,7 @@ export default function Craft({ activeLensId, onSelectLens }) {
 
           <ul key={active.id} role="tabpanel" className="panel-in mt-10 grid border-t border-[var(--line)] md:grid-cols-2 md:gap-x-16">
             {active.skills.map((s, i) => (
-              <li key={s} className="row-hover flex items-baseline justify-between border-b border-[var(--line)] py-5">
+              <li key={s} style={{ '--i': i }} className="row-hover flex items-baseline justify-between border-b border-[var(--line)] py-5">
                 <span className="display text-3xl sm:text-4xl">{s}</span>
                 <span className="font-mono text-xs text-[var(--muted)]">0{i + 1}</span>
               </li>

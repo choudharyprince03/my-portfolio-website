@@ -49,7 +49,7 @@ export default function ProjectDetails() {
             to="/#work"
             className="group inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
           >
-            <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft size={18} className="transition-transform [@media(hover:hover)]:group-hover:-translate-x-1" />
             <span>Back to case studies</span>
           </Link>
           <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)]">

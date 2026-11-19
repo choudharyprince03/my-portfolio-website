@@ -8,7 +8,7 @@ export default function Discovery() {
       <div className="sc-wrap grid gap-12 lg:grid-cols-[0.3fr_1fr] lg:gap-20">
         <p className="eyebrow lg:pt-3">(01) About</p>
         <div className="space-y-14">
-          <h2 data-sc-in className="display max-w-[20ch] text-[clamp(2.6rem,6.4vw,6rem)]">
+          <h2 data-sc-in="rise" className="display max-w-[20ch] text-[clamp(2.6rem,6.4vw,6rem)]">
             I turn buyer friction into <span className="relative inline-block italic text-[var(--accent)]">shipped<Doodle name="underline" preserve delay={0.3} className="absolute -bottom-1 left-0 h-[0.14em] w-full" /></span> software.
           </h2>
 

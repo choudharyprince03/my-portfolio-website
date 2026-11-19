@@ -34,7 +34,7 @@ export default function LaunchWork() {
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[0.3fr_1fr] lg:gap-20">
           <p className="eyebrow lg:pt-3">(03) Selected projects</p>
-          <h2 data-sc-in className="display text-[clamp(2.6rem,6.4vw,6rem)]">
+          <h2 data-sc-in="rise" className="display text-[clamp(2.6rem,6.4vw,6rem)]">
             Built, shipped, <span className="relative inline-block italic text-[var(--accent)]">explained.<Doodle name="squiggle" preserve delay={0.3} className="absolute -bottom-[0.18em] left-0 h-[0.2em] w-full" /></span>
           </h2>
         </div>
@@ -55,7 +55,7 @@ export default function LaunchWork() {
               <div className={`flex flex-col justify-between gap-8 lg:col-span-5 ${i % 2 ? 'lg:order-1' : ''}`}>
                 <div>
                   <p data-sc-in className="eyebrow">0{i + 1} · {p.category}</p>
-                  <h3 data-sc-in className="display mt-3 text-[clamp(3rem,5.4vw,5.2rem)]">
+                  <h3 data-sc-in="rise" className="display mt-3 text-[clamp(3rem,5.4vw,5.2rem)]">
                     <Link to={`/project/${p.id}`} className="ulink">{p.name}</Link>
                   </h3>
                   <p data-sc-kinetic="words" data-sc-cue="0.05 0.4" className="mt-4 max-w-[32ch] text-xl leading-snug text-[var(--muted)]">{p.shortLine}</p>

@@ -91,7 +91,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { scrollbar-width: none; }
-.photo-frame img { transition: transform 700ms var(--sc-ease-out); }
+.photo-frame img { transition: transform 400ms var(--sc-ease-out); }
 @media (hover: hover) { .photo-frame:hover img { transform: scale(1.03); } }
 
 /* Lighter water-blue on the dark ground for contrast */
@@ -162,18 +162,39 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) { .focus-entry { opacity: 1; transform: none; } }
 
 /* Skills panel + list hover */
-.panel-in { animation: panelIn 520ms var(--sc-ease-out) both; }
+.panel-in > li { animation: panelIn 420ms var(--sc-ease-out) calc(var(--i, 0) * 40ms) both; }
 @keyframes panelIn { from { opacity: 0; transform: translateY(14px); } }
-@media (prefers-reduced-motion: reduce) { .panel-in { animation: none; } }
-.row-hover { transition: padding-left 300ms var(--sc-ease-out), background-color 300ms; }
-@media (hover: hover) { .row-hover:hover { padding-left: 14px; background: color-mix(in oklab, var(--accent) 7%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .panel-in > li { animation: none; } }
+.row-hover { transition: background-color 300ms; }
+.row-hover > :first-child { transition: transform 300ms var(--sc-ease-out); }
+@media (hover: hover) { .row-hover:hover { background: color-mix(in oklab, var(--accent) 7%, transparent); } .row-hover:hover > :first-child { transform: translateX(14px); } }
 
 /* Route curtain */
-.curtain { position: fixed; inset: 0; z-index: 90; background: var(--ink); pointer-events: none; transform: translateY(-101%); animation: curtain 900ms cubic-bezier(.77,0,.18,1) both; }
-@keyframes curtain { 0% { transform: translateY(0); } 55% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+.curtain { position: fixed; inset: 0; z-index: 90; background: var(--ink); pointer-events: none; transform: translateY(-101%); animation: curtain 600ms var(--sc-ease-in-out) both; }
+@keyframes curtain { 0%, 35% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
 @media (prefers-reduced-motion: reduce) { .curtain { display: none; } }
 
 /* Nexus minimal visual: a dot travels the line (roles → guard → insight) */
-.nx-dot { left: 0; animation: nxTravel 3.6s cubic-bezier(.6,0,.3,1) infinite; }
+.nx-dot { left: 0; animation: nxTravel 3.6s var(--sc-ease-in-out) infinite; }
 @keyframes nxTravel { 0% { left: 0; } 80%, 100% { left: calc(100% - 1.5cqw); } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .nx-dot { animation: none; left: calc(100% - 1.5cqw); } }
+
+/* Hero entrance: one sequence, started when the engine is ready. Name lines
+   rise from behind a mask; everything else fades up. */
+.hero-mask { overflow-y: clip; padding: .08em .1em .14em; margin: -.08em -.1em -.14em; }
+.hero-rise { display: block; transform: translate3d(0, 105%, 0); }
+.hero-fade { opacity: 0; }
+.sc-ready .hero-rise { animation: heroRise 900ms var(--sc-ease-out) var(--d, 0ms) both; }
+.sc-ready .hero-fade { animation: heroFade 700ms var(--sc-ease-out) var(--d, 0ms) both; }
+@keyframes heroRise { from { transform: translate3d(0, 105%, 0); } to { transform: translate3d(0, 0, 0); } }
+@keyframes heroFade { from { opacity: 0; transform: translate3d(0, 12px, 0); } to { opacity: 1; transform: none; } }
+@keyframes heroFadeOnly { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .sc-ready .hero-rise { transform: none; animation: none; }
+  .sc-ready .hero-fade { animation: heroFadeOnly 300ms ease-out var(--d, 0ms) both; }
+}
+
+/* Mobile menu: fades in from the header it belongs to */
+.menu-in { animation: menuIn 220ms var(--sc-ease-out) both; }
+@keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .menu-in { animation: menuIn 160ms ease-out both; } @keyframes menuIn { from { opacity: 0; } } }

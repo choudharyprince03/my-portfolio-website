@@ -7,7 +7,7 @@ export default function Journey() {
       <div className="sc-wrap grid gap-12 lg:grid-cols-[0.3fr_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">(02) Experience</p>
-          <h2 data-sc-in className="display mt-4 text-[clamp(2.6rem,5vw,4.5rem)]">The path so far.</h2>
+          <h2 data-sc-in="rise" className="display mt-4 text-[clamp(2.6rem,5vw,4.5rem)]">The path so far.</h2>
         </div>
 
         <ol className="relative pl-8 sm:pl-12">

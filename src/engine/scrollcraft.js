@@ -518,6 +518,13 @@
           if (!isNaN(stagger)) {
             Array.prototype.forEach.call(el.children, function (kid, i) {
               kid.style.transitionDelay = (i * stagger) + 'ms';
+              // The delay is for the entrance only; drop it once that lands so
+              // later transitions on the same child (hover etc.) are not late.
+              kid.addEventListener('transitionend', function clearDelay(ev) {
+                if (ev.target !== kid) return;
+                kid.style.transitionDelay = '';
+                kid.removeEventListener('transitionend', clearDelay);
+              });
               kid.classList.add('sc-in');
             });
           }

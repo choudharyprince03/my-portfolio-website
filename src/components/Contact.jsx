@@ -40,11 +40,11 @@ export default function Contact({ activeLensId, onSelectLens }) {
       className="dark-zone relative overflow-hidden bg-[#1B1B1B] py-[clamp(5rem,11vw,10rem)] text-[#FAFAFB]">
       <div className="sc-wrap">
         <p className="eyebrow !text-[#FAFAFB]/60">(05) Contact</p>
-        <h2 className="display mt-6 text-[clamp(4rem,13vw,12.5rem)]">
+        <h2 data-sc-in="rise" className="display mt-6 text-[clamp(4rem,13vw,12.5rem)]">
           <span className="block">Let&apos;s build</span><span className="relative block w-fit italic text-[var(--accent)]">together.<Doodle name="sparkle" delay={0.4} className="absolute -right-[0.45em] -top-[0.1em] hidden h-[0.45em] w-[0.45em] md:block" /></span>
         </h2>
 
-        <div className="mt-16 grid gap-14 lg:grid-cols-2 lg:gap-24">
+        <div data-sc-in className="mt-16 grid gap-14 lg:grid-cols-2 lg:gap-24">
           <div className="space-y-8">
             <p className="max-w-[40ch] text-xl leading-snug text-[#FAFAFB]/80">
               Open to Associate Product Manager roles.

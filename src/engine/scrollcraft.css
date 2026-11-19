@@ -285,8 +285,14 @@ video[data-sc-scrub] { opacity: 0; transition: opacity 380ms var(--sc-ease-out);
 /* flow reveal (fires once) */
 [data-sc-in], [data-sc-stagger] > * {
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
-  transition: opacity 620ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 560ms var(--sc-ease-out), transform 560ms var(--sc-ease-out);
+}
+/* Display type: a fixed pixel rise is invisible at 6rem+, so the offset scales
+   with the heading's own size (em) and the move runs a little longer. */
+[data-sc-in="rise"] {
+  transform: translate3d(0, 0.28em, 0);
+  transition-duration: 800ms;
 }
 [data-sc-in].sc-in, [data-sc-stagger] > .sc-in { opacity: 1; transform: none; }
 

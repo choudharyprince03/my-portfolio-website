@@ -30,7 +30,7 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-[#FAFAFB]/85 backdrop-blur-md border-b border-[var(--line)]' : ''}`}>
+      <header className={`fixed inset-x-0 top-0 z-[60] transition-[background-color,border-color,backdrop-filter] duration-300 ${scrolled ? 'bg-[#FAFAFB]/85 backdrop-blur-md border-b border-[var(--line)]' : ''}`}>
         <div className="sc-wrap flex h-16 items-center justify-between">
           <Link to="/" aria-label="Prince Choudhary, home" className="display text-2xl">
             {profile.shortName}<span className="text-[var(--accent)]">.</span>
@@ -54,7 +54,7 @@ export default function Nav() {
         </div>
       </header>
       {open && (
-        <div className="fixed inset-0 z-[58] bg-[var(--paper)] pt-24 md:hidden">
+        <div className="menu-in fixed inset-0 z-[58] bg-[var(--paper)] pt-24 md:hidden">
           <nav aria-label="Mobile" className="sc-wrap grid gap-2">
             {links.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)}
